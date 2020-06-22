@@ -21,6 +21,7 @@ class _SignInState extends State<SignIn> {
         brightness: Brightness.light,
       ),
       body: Form(
+        key: _formKey,
         child: Container(
           // color: Colors.blue,
           margin: EdgeInsets.symmetric(horizontal: 24,),
@@ -68,6 +69,25 @@ class _SignInState extends State<SignIn> {
                     fontSize: 16,
                   ),
                 ),
+              ),
+              SizedBox(height: 18,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Don't have an account? ",
+                    style: TextStyle(
+                      fontSize: 15.5,
+                    ),
+                  ),
+                  Text(
+                    "Sign up",
+                    style: TextStyle(
+                      fontSize: 15.5,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 80,),
             ],
