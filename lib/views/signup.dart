@@ -77,7 +77,7 @@ class _SignUpState extends State<SignUp> {
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width - 48,
                   child: Text(
-                    "Sign In",
+                    "Sign Up",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -105,6 +105,7 @@ class _SignUpState extends State<SignUp> {
                       "Sign In",
                       style: TextStyle(
                         fontSize: 15.5,
+                        color: Colors.blue,
                         decoration: TextDecoration.underline,
                       ),
                     ),

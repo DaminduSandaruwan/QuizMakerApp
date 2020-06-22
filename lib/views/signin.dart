@@ -53,21 +53,23 @@ class _SignInState extends State<SignIn> {
                 },
               ),
               SizedBox(height: 25,),
-              Container(
-                
-                padding: EdgeInsets.symmetric(vertical:18),
-                // height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width - 48,
-                child: Text(
-                  "Sign In",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
+              GestureDetector(
+                onTap:(){},
+                child: Container(                
+                  padding: EdgeInsets.symmetric(vertical:18),
+                  // height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width - 48,
+                  child: Text(
+                    "Sign In",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ),
@@ -91,6 +93,7 @@ class _SignInState extends State<SignIn> {
                       "Sign up",
                       style: TextStyle(
                         fontSize: 15.5,
+                        color: Colors.blue ,
                         decoration: TextDecoration.underline,
                       ),
                     ),
