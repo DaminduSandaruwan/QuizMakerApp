@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_maker/services/auth.dart';
+import 'package:quiz_maker/views/home.dart';
 import 'package:quiz_maker/views/signin.dart';
 import 'package:quiz_maker/widgets/widgets.dart';
  
@@ -11,10 +13,24 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   String name,email, password;
+  AuthService authService = new AuthService();
+  bool _isLoading = false;
 
-  signUp(){
+  signUp() async{
     if(_formKey.currentState.validate()){
-
+      setState(() {
+        _isLoading=true;
+      });
+      authService.signUpWithEmailAndPassword(email, password).then((value){
+        if(value !=null){
+          setState(() {
+            _isLoading=false;
+          });
+          Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) => Home() ,
+          ));
+        }
+      });
     }
   }
 
@@ -28,7 +44,11 @@ class _SignUpState extends State<SignUp> {
         elevation: 0.0,
         brightness: Brightness.light,
       ),
-      body: Form(
+      body: _isLoading ? Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ): Form(
         key: _formKey,
         child: Container(
           // color: Colors.blue,
@@ -61,6 +81,7 @@ class _SignUpState extends State<SignUp> {
               ),
               SizedBox(height: 6,), 
               TextFormField(
+                obscureText: true,
                 validator: (val){
                   return val.isEmpty ? "Enter your Password" : null;
                 },

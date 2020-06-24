@@ -14,17 +14,17 @@ class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   String email, password;
   AuthService authService = new AuthService();
-  bool isLoading = false;
+  bool _isLoading = false;
   
   signIn() async{
     if(_formKey.currentState.validate()) {
       setState(() {
-        isLoading=true;
+        _isLoading =true;
       });
       await authService.signInEmailAndPass(email, password).then((value) {
         if(value!= null){
               setState(() {
-            isLoading=false;
+            _isLoading =false;
           });
           Navigator.pushReplacement(context, MaterialPageRoute(
             builder: (context) => Home(),
@@ -44,7 +44,7 @@ class _SignInState extends State<SignIn> {
         elevation: 0.0,
         brightness: Brightness.light,
       ),
-      body: isLoading ? Container(
+      body: _isLoading ? Container(
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -69,6 +69,7 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 6,), 
               TextFormField(
+                obscureText: true,
                 validator: (val){
                   return val.isEmpty ? "Enter your Password" : null;
                 },
