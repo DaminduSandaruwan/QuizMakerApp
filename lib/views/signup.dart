@@ -11,6 +11,13 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   String name,email, password;
+
+  signUp(){
+    if(_formKey.currentState.validate()){
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +73,9 @@ class _SignUpState extends State<SignUp> {
               ),
               SizedBox(height: 25,),
               GestureDetector(
-                onTap: (){},
+                onTap: (){
+                  signUp();
+                },
                 child: Container(                
                   padding: EdgeInsets.symmetric(vertical:18),
                   // height: 50,
