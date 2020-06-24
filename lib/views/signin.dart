@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_maker/services/auth.dart';
+import 'package:quiz_maker/views/home.dart';
 import 'package:quiz_maker/views/signup.dart';
 import 'package:quiz_maker/widgets/widgets.dart';
 
@@ -11,9 +13,24 @@ class _SignInState extends State<SignIn> {
 
   final _formKey = GlobalKey<FormState>();
   String email, password;
-  signIn(){
-    if(_formKey.currentState.validate()){
-
+  AuthService authService = new AuthService();
+  bool isLoading = false;
+  
+  signIn() async{
+    if(_formKey.currentState.validate()) {
+      setState(() {
+        isLoading=true;
+      });
+      await authService.signInEmailAndPass(email, password).then((value) {
+        if(value!= null){
+              setState(() {
+            isLoading=false;
+          });
+          Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) => Home(),
+          ));
+        }
+      });     
     }
   }
 
@@ -27,7 +44,11 @@ class _SignInState extends State<SignIn> {
         elevation: 0.0,
         brightness: Brightness.light,
       ),
-      body: Form(
+      body: isLoading ? Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ): Form(
         key: _formKey,
         child: Container(
           // color: Colors.blue,
