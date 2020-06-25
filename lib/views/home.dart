@@ -13,9 +13,17 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: appBar(context),
         backgroundColor: Colors.transparent,
-        brightness: Brightness.light,
         elevation: 0.0,
         centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.black87),
+        brightness: Brightness.light,
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+             
+          ],
+        ),
       ),
     );
   }
