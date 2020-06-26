@@ -61,7 +61,12 @@ class _HomeState extends State<Home> {
                ),
                Spacer(),
 
-               blueButton(context, "Create Quiz"),
+               GestureDetector(
+                 onTap: (){
+                   
+                 },
+                 child: blueButton(context, "Create Quiz"),
+                ),
                SizedBox(height: 30,),
 
             ],

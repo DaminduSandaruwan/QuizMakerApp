@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   # cached_network_image: ^2.0.0
-  # cloud_firestore: ^0.13.3
+  cloud_firestore: ^0.13.3
   firebase_auth: ^0.15.2
   # provider: ^3.2.0
   # shared_preferences: ^0.5.6+3
