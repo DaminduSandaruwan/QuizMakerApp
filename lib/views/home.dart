@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_maker/services/database.dart';
+import 'package:quiz_maker/views/addQuestion.dart';
 import 'package:quiz_maker/widgets/widgets.dart';
 import 'package:random_string/random_string.dart';
 
@@ -15,8 +16,13 @@ class _HomeState extends State<Home> {
   String quizId;
   DatabaseService databaseService = new DatabaseService();
 
-  creteQuizOnline(){
+  bool _isLoading = false;
+
+  creteQuizOnline() async{
     if(_formKey.currentState.validate()){
+      setState(() {
+        _isLoading= true;
+      });
       quizId = randomAlphaNumeric(16);
       Map<String,String> quizMap = {
         "quizId" : quizId,
@@ -24,7 +30,14 @@ class _HomeState extends State<Home> {
         "quizTitle":quizTitle,
         "quizDesc":quizDescription
       };
-      databaseService.addQuizData(quizMap, quizId);
+      await databaseService.addQuizData(quizMap, quizId).then((value) {
+        setState(() {
+          _isLoading = false;
+          Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) => AddQuestion(),
+          ));
+        });
+      });
     } 
   }
 
@@ -39,7 +52,11 @@ class _HomeState extends State<Home> {
         iconTheme: IconThemeData(color: Colors.black87),
         brightness: Brightness.light,
       ),
-      body: Form(
+      body: _isLoading ? Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ) : Form(
         key: _formKey,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal:24),
