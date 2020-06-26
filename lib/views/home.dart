@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_maker/services/database.dart';
 import 'package:quiz_maker/widgets/widgets.dart';
+import 'package:random_string/random_string.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,6 +12,21 @@ class _HomeState extends State<Home> {
 
   final _formKey = GlobalKey<FormState>();
   String quizImageUrl, quizTitle, quizDescription;
+  String quizId;
+  DatabaseService databaseService = new DatabaseService();
+
+  creteQuizOnline(){
+    if(_formKey.currentState.validate()){
+      quizId = randomAlphaNumeric(16);
+      Map<String,String> quizMap = {
+        "quizId" : quizId,
+        "quizImgUrl" : quizImageUrl,
+        "quizTitle":quizTitle,
+        "quizDesc":quizDescription
+      };
+      databaseService.addQuizData(quizMap, quizId);
+    } 
+  }
 
   @override
   Widget build(BuildContext context) {
