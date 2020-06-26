@@ -10,7 +10,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   final _formKey = GlobalKey<FormState>();
   String quizImageUrl, quizTitle, quizDescription;
   String quizId;
@@ -18,27 +17,29 @@ class _HomeState extends State<Home> {
 
   bool _isLoading = false;
 
-  creteQuizOnline() async{
-    if(_formKey.currentState.validate()){
+  creteQuizOnline() async {
+    if (_formKey.currentState.validate()) {
       setState(() {
-        _isLoading= true;
+        _isLoading = true;
       });
       quizId = randomAlphaNumeric(16);
-      Map<String,String> quizMap = {
-        "quizId" : quizId,
-        "quizImgUrl" : quizImageUrl,
-        "quizTitle":quizTitle,
-        "quizDesc":quizDescription
+      Map<String, String> quizMap = {
+        "quizId": quizId,
+        "quizImgUrl": quizImageUrl,
+        "quizTitle": quizTitle,
+        "quizDesc": quizDescription
       };
       await databaseService.addQuizData(quizMap, quizId).then((value) {
         setState(() {
           _isLoading = false;
-          Navigator.pushReplacement(context, MaterialPageRoute(
-            builder: (context) => AddQuestion(),
-          ));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddQuestion(),
+              ));
         });
       });
-    } 
+    }
   }
 
   @override
@@ -52,61 +53,68 @@ class _HomeState extends State<Home> {
         iconTheme: IconThemeData(color: Colors.black87),
         brightness: Brightness.light,
       ),
-      body: _isLoading ? Container(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ) : Form(
-        key: _formKey,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal:24),
-          child: Column(
-            children: <Widget>[
-               TextFormField(
-                 validator: (val)=> val.isEmpty ? "Enter Image Url":null,
-                 decoration: InputDecoration(
-                   hintText: "Quiz Image Url",
-                 ),
-                 onChanged: (val){
-                   quizImageUrl=val;
-                 },
-               ),
-               SizedBox(height: 6,),
-
-               TextFormField(
-                 validator: (val)=> val.isEmpty ? "Enter Quiz Title":null,
-                 decoration: InputDecoration(
-                   hintText: "Quiz Title",
-                 ),
-                 onChanged: (val){
-                   quizTitle=val;
-                 },
-               ),
-               SizedBox(height: 6,),
-
-               TextFormField(
-                 validator: (val)=> val.isEmpty ? "Quiz Description":null,
-                 decoration: InputDecoration(
-                   hintText: "Quiz Description",
-                 ),
-                 onChanged: (val){
-                   quizDescription=val;
-                 },
-               ),
-               Spacer(),
-
-               GestureDetector(
-                 onTap: (){
-                   
-                 },
-                 child: blueButton(context, "Create Quiz"),
+      body: _isLoading
+          ? Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : Form(
+              key: _formKey,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      validator: (val) =>
+                          val.isEmpty ? "Enter Image Url" : null,
+                      decoration: InputDecoration(
+                        hintText: "Quiz Image Url",
+                      ),
+                      onChanged: (val) {
+                        quizImageUrl = val;
+                      },
+                    ),
+                    SizedBox(
+                      height: 6,
+                    ),
+                    TextFormField(
+                      validator: (val) =>
+                          val.isEmpty ? "Enter Quiz Title" : null,
+                      decoration: InputDecoration(
+                        hintText: "Quiz Title",
+                      ),
+                      onChanged: (val) {
+                        quizTitle = val;
+                      },
+                    ),
+                    SizedBox(
+                      height: 6,
+                    ),
+                    TextFormField(
+                      validator: (val) =>
+                          val.isEmpty ? "Quiz Description" : null,
+                      decoration: InputDecoration(
+                        hintText: "Quiz Description",
+                      ),
+                      onChanged: (val) {
+                        quizDescription = val;
+                      },
+                    ),
+                    Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        creteQuizOnline();
+                      },
+                      child: blueButton(context, "Create Quiz"),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                  ],
                 ),
-               SizedBox(height: 30,),
-
-            ],
-          ),
-        ),
-      ),
+              ),
+            ),
     );
   }
 }
