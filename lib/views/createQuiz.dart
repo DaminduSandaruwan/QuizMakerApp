@@ -10,7 +10,7 @@ class CreateQuiz extends StatefulWidget {
 }
 
 class _CreateQuizState extends State<CreateQuiz> {
-    final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   String quizImageUrl, quizTitle, quizDescription;
   String quizId;
   DatabaseService databaseService = new DatabaseService();
@@ -41,6 +41,7 @@ class _CreateQuizState extends State<CreateQuiz> {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,7 +106,10 @@ class _CreateQuizState extends State<CreateQuiz> {
                       onTap: () {
                         creteQuizOnline();
                       },
-                      child: blueButton(context, "Create Quiz"),
+                      child: blueButton(
+                        context: context,
+                        label: "Create Quiz"
+                      ),
                     ),
                     SizedBox(
                       height: 30,
