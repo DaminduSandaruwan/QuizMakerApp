@@ -87,7 +87,25 @@ class _AddQuestionState extends State<AddQuestion> {
               },
             ),
             Spacer(),
-            
+            Row(
+              children: <Widget>[
+                blueButton(
+                  context: context,
+                  label: "Submit",
+                  buttonWidth: MediaQuery.of(context).size.width/2 - 36,
+                ),
+                Spacer(),
+                blueButton(
+                  context: context,
+                  label: "Add Question",
+                  buttonWidth: MediaQuery.of(context).size.width/2 - 36,
+                ),
+                
+              ],
+            ),
+            SizedBox(
+              height: 25,
+            ),
           ],
         ),
       ),
