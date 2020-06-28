@@ -17,8 +17,13 @@ class _AddQuestionState extends State<AddQuestion> {
 
   DatabaseService databaseService = new DatabaseService();
 
-  uploadQuizData(){
+  uploadQuestionData() async{
     if(_formKey.currentState.validate()){
+
+      setState(() {
+        _isLoading=true;
+      });
+
       Map<String,String> questionMap ={
         "question":question,
         "option1":option1,
@@ -26,7 +31,12 @@ class _AddQuestionState extends State<AddQuestion> {
         "option3":option3,
         "option4":option4        
       };
-      databaseService.addQuestionData(questionMap, widget.quizId);
+      await databaseService.addQuestionData(questionMap, widget.quizId).then((value){
+        setState(() {
+          _isLoading=false;
+        });
+      });
+
     }
   }
 
@@ -118,7 +128,7 @@ class _AddQuestionState extends State<AddQuestion> {
                 children: <Widget>[
                   GestureDetector(
                     onTap: (){
-
+                      Navigator.pop(context);
                     },
                     child: blueButton(
                       context: context,
@@ -129,7 +139,7 @@ class _AddQuestionState extends State<AddQuestion> {
                   Spacer(),
                   GestureDetector(
                     onTap: (){
-                      
+                      uploadQuestionData();
                     },
                     child: blueButton(
                       context: context,
