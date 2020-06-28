@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_maker/services/database.dart';
 import 'package:quiz_maker/widgets/widgets.dart';
 
 class AddQuestion extends StatefulWidget {
+  final String quizId;
+  AddQuestion(this.quizId);
+
   @override
   _AddQuestionState createState() => _AddQuestionState();
 }
@@ -9,6 +13,23 @@ class AddQuestion extends StatefulWidget {
 class _AddQuestionState extends State<AddQuestion> {
   final _formKey = GlobalKey<FormState>();
   String question, option1,option2,option3,option4;
+  bool _isLoading= false;
+
+  DatabaseService databaseService = new DatabaseService();
+
+  uploadQuizData(){
+    if(_formKey.currentState.validate()){
+      Map<String,String> questionMap ={
+        "question":question,
+        "option1":option1,
+        "option2":option2,
+        "option3":option3,
+        "option4":option4        
+      };
+      databaseService.addQuestionData(questionMap, widget.quizId);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +41,11 @@ class _AddQuestionState extends State<AddQuestion> {
         iconTheme: IconThemeData(color: Colors.black87),
         brightness: Brightness.light,
       ),
-      body: Form(
+      body:_isLoading ? Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ) : Form(
         key: _formKey,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal:24),
