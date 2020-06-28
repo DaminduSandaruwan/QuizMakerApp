@@ -23,11 +23,15 @@ class _MyAppState extends State<MyApp> {
   }
 
   checkUserLoggedInStatus() async{
-    _isLoggedIn= await HelperFunction.getUserLoggedInDetails();
+    HelperFunction.getUserLoggedInDetails().then((value){
+      setState(() {
+        _isLoggedIn = value;
+      });
+    });
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
