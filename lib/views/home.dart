@@ -85,19 +85,42 @@ class QuizTile extends StatelessWidget {
       height: 150,
       child: Stack(
         children: <Widget>[
-          Image.network(
-            imgUrl,
-            width: MediaQuery.of(context).size.width-48,
-            fit: BoxFit.cover,
-            ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              imgUrl,
+              width: MediaQuery.of(context).size.width-48,
+              fit: BoxFit.cover,
+              ),
+          ),
           Container(
+            
+            decoration: BoxDecoration(
+              color: Colors.black26,
+              borderRadius: BorderRadius.circular(8)
+            ),
             //color: Colors.blue,
             alignment: Alignment.center,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(title),
-                Text(desc)
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  ),
+                  SizedBox(height: 5,),
+                Text(
+                  desc,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
               ],
             ),
           ),
