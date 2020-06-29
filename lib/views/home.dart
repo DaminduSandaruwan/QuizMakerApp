@@ -14,6 +14,7 @@ class _HomeState extends State<Home> {
   DatabaseService databaseService = new DatabaseService();
   Widget quizList(){
     return Container(
+      margin: EdgeInsets.symmetric(horizontal:24),
       child: StreamBuilder(
         stream: quizStream,
         builder: (context, snapshot) {
@@ -80,11 +81,20 @@ class QuizTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom:8),
+      height: 150,
       child: Stack(
         children: <Widget>[
-          Image.network(imgUrl),
+          Image.network(
+            imgUrl,
+            width: MediaQuery.of(context).size.width-48,
+            fit: BoxFit.cover,
+            ),
           Container(
+            //color: Colors.blue,
+            alignment: Alignment.center,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(title),
                 Text(desc)
