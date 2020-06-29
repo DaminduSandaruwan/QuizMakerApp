@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_maker/services/database.dart';
 import 'package:quiz_maker/views/createQuiz.dart';
 import 'package:quiz_maker/widgets/widgets.dart';
 
@@ -8,8 +9,43 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  Stream quizStream;
+  DatabaseService databaseService = new DatabaseService();
+  Widget quizList(){
+    return Container(
+      child: StreamBuilder(
+        stream: quizStream,
+        builder: (context, snapshot) {
+          return snapshot.data == null ? Container() :
+          ListView.builder(
+            itemCount: snapshot.data.documents.length,
+              itemBuilder: (context,index){
+                return QuizTile(
+                  imgUrl: snapshot.data.documents[index].data["quizImgUrl"],
+                  desc: snapshot.data.documents[index].data["quizDesc"],
+                  title: snapshot.data.documents[index].data["quizTitle"],
+                );
+            });
+        },
+      ),
+    );
+  }
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    databaseService.getQuizData().then((val){
+      setState(() {
+        quizStream = val;
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {   
+
+
     return Scaffold(
       appBar: AppBar(
         title: appBar(context),
@@ -19,11 +55,7 @@ class _HomeState extends State<Home> {
         iconTheme: IconThemeData(color: Colors.black87),
         brightness: Brightness.light,
       ),
-      body: Container(
-        child: Column(
-          children: <Widget>[],
-        ),
-      ),
+      body: quizList(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -33,6 +65,33 @@ class _HomeState extends State<Home> {
                 builder: (context) => CreateQuiz(),
               ));
         },
+      ),
+    );
+  }
+}
+
+class QuizTile extends StatelessWidget {
+  final String imgUrl;
+  final String title;
+  final String desc;
+
+  QuizTile({@required this.imgUrl,@required this.title,@required this.desc});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Stack(
+        children: <Widget>[
+          Image.network(imgUrl),
+          Container(
+            child: Column(
+              children: <Widget>[
+                Text(title),
+                Text(desc)
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
