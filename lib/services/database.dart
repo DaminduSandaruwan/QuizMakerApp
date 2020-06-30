@@ -25,4 +25,12 @@ class DatabaseService {
   getQuizData() async {
     return await Firestore.instance.collection("Quiz").snapshots();
   }
+
+  getsQuizData(String quizId) async {
+    return await Firestore.instance
+    .collection("Quiz")
+    .document(quizId)
+    .collection("QNA")
+    .getDocuments();
+  }
 }
