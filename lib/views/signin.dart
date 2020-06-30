@@ -98,10 +98,7 @@ class _SignInState extends State<SignIn> {
                       onTap: () {
                         signIn();
                       },
-                      child: blueButton(
-                        context: context,
-                        label: "Sign In"
-                      ),
+                      child: blueButton(context: context, label: "Sign In"),
                     ),
                     SizedBox(
                       height: 18,

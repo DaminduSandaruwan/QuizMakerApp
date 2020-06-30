@@ -14,7 +14,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   bool _isLoggedIn = false;
   @override
   void initState() {
@@ -22,8 +21,8 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  checkUserLoggedInStatus() async{
-    HelperFunction.getUserLoggedInDetails().then((value){
+  checkUserLoggedInStatus() async {
+    HelperFunction.getUserLoggedInDetails().then((value) {
       setState(() {
         _isLoggedIn = value;
       });
@@ -31,7 +30,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,

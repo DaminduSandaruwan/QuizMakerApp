@@ -26,7 +26,9 @@ Widget blueButton({BuildContext context, String label, buttonWidth}) {
       borderRadius: BorderRadius.circular(30),
     ),
     alignment: Alignment.center,
-    width: buttonWidth != null ? buttonWidth : MediaQuery.of(context).size.width - 48,
+    width: buttonWidth != null
+        ? buttonWidth
+        : MediaQuery.of(context).size.width - 48,
     child: Text(
       label,
       style: TextStyle(

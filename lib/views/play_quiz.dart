@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_maker/widgets/widgets.dart';
 
 class PlayQuiz extends StatefulWidget {
 
@@ -19,8 +20,15 @@ class _PlayQuizState extends State<PlayQuiz> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      appBar: AppBar(
+        title: appBar(context),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.black87),
+        brightness: Brightness.light,
+      ),
     );
   }
 }
