@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_maker/services/database.dart';
 import 'package:quiz_maker/views/createQuiz.dart';
+import 'package:quiz_maker/views/play_quiz.dart';
 import 'package:quiz_maker/widgets/widgets.dart';
 
 class Home extends StatefulWidget {
@@ -26,6 +27,7 @@ class _HomeState extends State<Home> {
                   imgUrl: snapshot.data.documents[index].data["quizImgUrl"],
                   desc: snapshot.data.documents[index].data["quizDesc"],
                   title: snapshot.data.documents[index].data["quizTitle"],
+                  quizId: snapshot.data.documents[index].data["quizId"],
                 );
             });
         },
@@ -75,56 +77,66 @@ class QuizTile extends StatelessWidget {
   final String imgUrl;
   final String title;
   final String desc;
+  final String quizId;
 
-  QuizTile({@required this.imgUrl,@required this.title,@required this.desc});
+  QuizTile({@required this.imgUrl,@required this.title,@required this.desc,@required this.quizId});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom:8),
-      height: 150,
-      child: Stack(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              imgUrl,
-              width: MediaQuery.of(context).size.width-48,
-              fit: BoxFit.cover,
-              ),
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) => PlayQuiz(
+            quizId: quizId,
           ),
-          Container(
-            
-            decoration: BoxDecoration(
-              color: Colors.black26,
-              borderRadius: BorderRadius.circular(8)
-            ),
-            //color: Colors.blue,
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  ),
-                  SizedBox(height: 5,),
-                Text(
-                  desc,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500
-                  ),
+        ));
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom:8),
+        height: 150,
+        child: Stack(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.network(
+                imgUrl,
+                width: MediaQuery.of(context).size.width-48,
+                fit: BoxFit.cover,
                 ),
-              ],
             ),
-          ),
-        ],
+            Container(
+              
+              decoration: BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadius.circular(8)
+              ),
+              //color: Colors.blue,
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    title,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    ),
+                    SizedBox(height: 5,),
+                  Text(
+                    desc,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
