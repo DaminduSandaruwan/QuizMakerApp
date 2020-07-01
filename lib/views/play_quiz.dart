@@ -21,7 +21,7 @@ int _notAttempted = 0;
 
 class _PlayQuizState extends State<PlayQuiz> {   
 
-  DatabaseService databaseService;
+  DatabaseService databaseService = new DatabaseService();
   QuerySnapshot questionSnapshot;
 
   QuestionModel getQuestionModelFromDataSnapshot(DocumentSnapshot questionSnapshot){
@@ -79,6 +79,8 @@ class _PlayQuizState extends State<PlayQuiz> {
             questionSnapshot.documents == null ?
             Container() :
             ListView.builder(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
               itemCount: questionSnapshot.documents.length,
               itemBuilder: (context,index){
                 return QuizPlayTile(
