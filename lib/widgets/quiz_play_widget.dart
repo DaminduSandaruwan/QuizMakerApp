@@ -4,7 +4,7 @@ class OptionTile extends StatefulWidget {
 
   final String option, description, correctAnswer, optionSelected;
 
-  const OptionTile({this.option, this.description, this.correctAnswer, this.optionSelected});
+  OptionTile({@required this.option,@required this.description,@required this.correctAnswer,@required this.optionSelected});
 
 
   @override
