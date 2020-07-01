@@ -82,7 +82,8 @@ class _PlayQuizState extends State<PlayQuiz> {
               itemCount: questionSnapshot.documents.length,
               itemBuilder: (context,index){
                 return QuizPlayTile(
-
+                  questionModel: getQuestionModelFromDataSnapshot(questionSnapshot.documents[index]),
+                  index: index,
                 );
               },
             ),
@@ -95,7 +96,8 @@ class _PlayQuizState extends State<PlayQuiz> {
 
 class QuizPlayTile extends StatefulWidget {
   final QuestionModel questionModel;
-  QuizPlayTile({this.questionModel});
+  final int index;
+  QuizPlayTile({this.questionModel, this.index});
   
   @override
   _QuizPlayTileState createState() => _QuizPlayTileState();
