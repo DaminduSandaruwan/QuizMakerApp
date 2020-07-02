@@ -77,8 +77,13 @@ class _PlayQuizState extends State<PlayQuiz> {
         child: Column(
           children: <Widget>[
             questionSnapshot == null ?
-            Container() :
+            Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ) :
             ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal:24),
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),
               itemCount: questionSnapshot.documents.length,
@@ -113,6 +118,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(widget.questionModel.question),
           SizedBox(height: 4,),
@@ -239,6 +245,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               optionSelected: optionSelected,
             ),
           ),
+          SizedBox(height: 20,)
         ],
       ),
     );
