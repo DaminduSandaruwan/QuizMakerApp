@@ -120,7 +120,13 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(widget.questionModel.question),
+          Text(
+            "Q${widget.index+1} ${widget.questionModel.question}",
+            style: TextStyle(
+              fontSize: 17,
+              color: Colors.black87,
+            ),
+          ),
           SizedBox(height: 4,),
           GestureDetector(
             onTap: (){
