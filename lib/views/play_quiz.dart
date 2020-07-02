@@ -152,7 +152,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               }
             },
             child: OptionTile(
-              correctAnswer: widget.questionModel.option1,
+              correctAnswer: widget.questionModel.correctOption,
               description: widget.questionModel.option1,
               option: "A",
               optionSelected: optionSelected,
@@ -183,7 +183,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               }
             },
             child: OptionTile(
-              correctAnswer: widget.questionModel.option1,
+              correctAnswer: widget.questionModel.correctOption,
               description: widget.questionModel.option2,
               option: "B",
               optionSelected: optionSelected,
@@ -214,7 +214,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               }
             },
             child: OptionTile(
-              correctAnswer: widget.questionModel.option1,
+              correctAnswer: widget.questionModel.correctOption,
               description: widget.questionModel.option3,
               option: "C",
               optionSelected: optionSelected,
@@ -245,7 +245,7 @@ class _QuizPlayTileState extends State<QuizPlayTile> {
               }
             },
             child: OptionTile(
-              correctAnswer: widget.questionModel.option1,
+              correctAnswer: widget.questionModel.correctOption,
               description: widget.questionModel.option4,
               option: "D",
               optionSelected: optionSelected,
