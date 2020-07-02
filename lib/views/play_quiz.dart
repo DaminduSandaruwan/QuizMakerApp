@@ -76,7 +76,7 @@ class _PlayQuizState extends State<PlayQuiz> {
       body: Container(
         child: Column(
           children: <Widget>[
-            questionSnapshot.documents == null ?
+            questionSnapshot == null ?
             Container() :
             ListView.builder(
               shrinkWrap: true,
