@@ -49,6 +49,29 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          // blueButton(
+          //   context: context,
+          //   label: "test",
+          //   buttonWidth: MediaQuery.of(context).size.width/4,
+          // ),
+          Container(
+            alignment: Alignment.center,
+            width: 100,
+            //color: Colors.red,
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.exit_to_app),
+                Text(
+                  "Sign Out",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
         title: appBar(context),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
