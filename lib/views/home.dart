@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_maker/helper/functions.dart';
 import 'package:quiz_maker/services/auth.dart';
 import 'package:quiz_maker/services/database.dart';
 import 'package:quiz_maker/views/createQuiz.dart';
@@ -54,6 +55,7 @@ class _HomeState extends State<Home> {
         actions: <Widget>[
           GestureDetector(
             onTap: (){
+              HelperFunction.saveUserLoggedInDetails(isLoggedIn: false);
               AuthService().signOut();
               Navigator.pushReplacement(context, MaterialPageRoute(
                 builder: (context) => SignIn(),
