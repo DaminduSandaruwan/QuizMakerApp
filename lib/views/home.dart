@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_maker/services/auth.dart';
 import 'package:quiz_maker/services/database.dart';
 import 'package:quiz_maker/views/createQuiz.dart';
 import 'package:quiz_maker/views/play_quiz.dart';
+import 'package:quiz_maker/views/signin.dart';
 import 'package:quiz_maker/widgets/widgets.dart';
 
 class Home extends StatefulWidget {
@@ -50,25 +52,28 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          // blueButton(
-          //   context: context,
-          //   label: "test",
-          //   buttonWidth: MediaQuery.of(context).size.width/4,
-          // ),
-          Container(
-            alignment: Alignment.center,
-            width: 100,
-            //color: Colors.red,
-            child: Row(
-              children: <Widget>[
-                Icon(Icons.exit_to_app),
-                Text(
-                  "Sign Out",
-                  style: TextStyle(
-                    color: Colors.black,
+          GestureDetector(
+            onTap: (){
+              AuthService().signOut();
+              Navigator.pushReplacement(context, MaterialPageRoute(
+                builder: (context) => SignIn(),
+              ));
+            },
+            child: Container(
+              alignment: Alignment.center,
+              width: 100,
+              //color: Colors.red,
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.exit_to_app),
+                  Text(
+                    "Sign Out",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           )
         ],
